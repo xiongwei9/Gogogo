@@ -16,18 +16,40 @@ func TestSort(t *testing.T) {
 		//nums := insertionSort(arr) // 插入排序
 		//nums := mergeSort(arr) // 归并排序
 		nums := quickSort(arr) // 快速排序
+		//nums := heapSort(arr) //堆排序
 
 		if len(nums) != len(arr) {
 			t.Error("array length error", index, nums)
+			continue
 		}
 		t.Log(nums)
 		for i := 1; i < len(nums); i++ {
 			if nums[i] < nums[i-1] {
 				t.Error(index, nums)
+				break
 			}
 		}
 	}
 }
+
+// 堆排序
+//func heapSort(arr []int) []int {
+//
+//	return nil
+//}
+//
+//func buildHeap(arr []int) {
+//	length := len(arr)
+//	for i := (length - 1) / 2; i >= 0; i-- {
+//		adjustHeap(arr, i)
+//	}
+//}
+//
+//func adjustHeap(arr []int, pos int) {
+//	length := len(arr)
+//	for child := pos*2 + 1; child < length; child = pos*2 + 1 {
+//	}
+//}
 
 // 快速排序
 func quickSort(arr []int) []int {
@@ -42,33 +64,25 @@ func quickSort(arr []int) []int {
 }
 
 func quickSortKernel(arr []int, left, right int) {
+	if left >= right {
+		return
+	}
 	key := arr[left]
-	pos := left
 	l, r := left, right
 
-	for l <= r {
-		for r >= pos && arr[r] >= key {
+	for l < r {
+		for l < r && key <= arr[r] { // 从右向左扫描，发现有小于key的数，就把它移到左边
 			r--
 		}
-		if r >= pos {
-			arr[pos] = arr[r]
-			pos = r
-		}
-		for l <= pos && arr[l] <= key {
+		arr[l] = arr[r]
+		for l < r && key >= arr[l] { // 从左向右扫描，发现有大于key的数，就把它移到右边
 			l++
 		}
-		if l <= pos {
-			arr[pos] = arr[l]
-			pos = l
-		}
+		arr[r] = arr[l]
 	}
-	arr[pos] = key
-	if pos-1 > left {
-		quickSortKernel(arr, left, pos-1)
-	}
-	if pos+1 < right {
-		quickSortKernel(arr, pos+1, right)
-	}
+	arr[l] = key
+	quickSortKernel(arr, left, l-1)
+	quickSortKernel(arr, l+1, right)
 }
 
 // 归并排序
