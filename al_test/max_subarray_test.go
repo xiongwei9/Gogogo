@@ -1,4 +1,4 @@
-package divideConquer_test
+package al_test
 
 import "testing"
 
