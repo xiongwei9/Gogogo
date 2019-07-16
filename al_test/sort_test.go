@@ -10,13 +10,14 @@ func TestSort(t *testing.T) {
 		{9, 3, 5, 7, 12, 1, 4, 2, 8},
 		{4, 5, 2, 6, 7, 3, 1, 9},
 		{10, 3, 5, 6, 2, 7, 5, 4, 7, 88},
+		{4, 1, 3, 2, 16, 9, 10, 14, 8, 7},
 	}
 	//sortFns := []func([]int)([]int){insertionSort, mergeSort, quickSort}
 	for index, arr := range list {
 		//nums := insertionSort(arr) // 插入排序
 		//nums := mergeSort(arr) // 归并排序
-		nums := quickSort(arr) // 快速排序
-		//nums := heapSort(arr) //堆排序
+		//nums := quickSort(arr) // 快速排序
+		nums := heapSort(arr) //堆排序
 
 		if len(nums) != len(arr) {
 			t.Error("array length error", index, nums)
@@ -33,23 +34,54 @@ func TestSort(t *testing.T) {
 }
 
 // 堆排序
-//func heapSort(arr []int) []int {
-//
-//	return nil
-//}
-//
-//func buildHeap(arr []int) {
-//	length := len(arr)
-//	for i := (length - 1) / 2; i >= 0; i-- {
-//		adjustHeap(arr, i)
-//	}
-//}
-//
-//func adjustHeap(arr []int, pos int) {
-//	length := len(arr)
-//	for child := pos*2 + 1; child < length; child = pos*2 + 1 {
-//	}
-//}
+func heapSort(arr []int) []int {
+	h := newMaxHeap(arr)
+
+	for h.size > 1 {
+		h.data[1], h.data[h.size] = h.data[h.size], h.data[1]
+		h.size--
+		h.buildMaxHeap()
+	}
+	return h.data[1:]
+}
+
+type heap struct {
+	data []int
+	size int
+}
+
+func newMaxHeap(arr []int) *heap {
+	length := len(arr)
+	nums := make([]int, length+1, length+1)
+	copy(nums[1:], arr)
+	h := &heap{data: nums, size: length}
+	h.buildMaxHeap()
+	return h
+}
+
+// 将任意数组构建为最大堆
+func (h *heap) buildMaxHeap() {
+	for i := h.size / 2; i >= 1; i-- {
+		h.maxHeapify(i)
+	}
+}
+
+// 以i结点为根，建立最大堆
+func (h *heap) maxHeapify(i int) {
+	l, r := i<<1, i<<1+1
+	t := i
+	if l <= h.size && h.data[l] > h.data[t] {
+		t = l
+	}
+	if r <= h.size && h.data[r] > h.data[t] {
+		t = r
+	}
+	// now: data[t] == max(data[i], data[l], data[r])
+	if t != i {
+		h.data[t], h.data[i] = h.data[i], h.data[t]
+		h.maxHeapify(t)
+	}
+}
 
 // 快速排序
 func quickSort(arr []int) []int {
