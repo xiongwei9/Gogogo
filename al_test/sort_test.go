@@ -1,6 +1,8 @@
 package al_test
 
 import (
+	"reflect"
+	"runtime"
 	"testing"
 )
 
@@ -12,24 +14,27 @@ func TestSort(t *testing.T) {
 		{10, 3, 5, 6, 2, 7, 5, 4, 7, 88},
 		{4, 1, 3, 2, 16, 9, 10, 14, 8, 7},
 	}
-	//sortFns := []func([]int)([]int){insertionSort, mergeSort, quickSort}
-	for index, arr := range list {
-		//nums := insertionSort(arr) // 插入排序
-		//nums := mergeSort(arr) // 归并排序
-		//nums := quickSort(arr) // 快速排序
-		nums := heapSort(arr) //堆排序
+	sortTest := func(fn func([]int) []int) {
+		t.Log("***** sort algorithm: " + runtime.FuncForPC(reflect.ValueOf(fn).Pointer()).Name() + " *****")
+		for index, arr := range list {
+			nums := fn(arr)
 
-		if len(nums) != len(arr) {
-			t.Error("array length error", index, nums)
-			continue
-		}
-		t.Log(nums)
-		for i := 1; i < len(nums); i++ {
-			if nums[i] < nums[i-1] {
-				t.Error(index, nums)
-				break
+			if len(nums) != len(arr) {
+				t.Error("array length error", index, nums)
+				continue
+			}
+			t.Log(nums)
+			for i := 1; i < len(nums); i++ {
+				if nums[i] < nums[i-1] {
+					t.Error(index, nums)
+					break
+				}
 			}
 		}
+	}
+	sortFns := []func([]int) []int{insertionSort, mergeSort, quickSort, heapSort}
+	for _, fn := range sortFns {
+		sortTest(fn)
 	}
 }
 
