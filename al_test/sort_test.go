@@ -104,22 +104,37 @@ func quickSortKernel(arr []int, left, right int) {
 	if left >= right {
 		return
 	}
-	key := arr[left]
-	l, r := left, right
 
-	for l < r {
-		for l < r && key <= arr[r] { // 从右向左扫描，发现有小于key的数，就把它移到左边
-			r--
+	/* method 1 */
+	//key := arr[left]
+	//l, r := left, right
+	//
+	//for l < r {
+	//	for l < r && key <= arr[r] { // 从右向左扫描，发现有小于key的数，就把它移到左边
+	//		r--
+	//	}
+	//	arr[l] = arr[r]
+	//	for l < r && key >= arr[l] { // 从左向右扫描，发现有大于key的数，就把它移到右边
+	//		l++
+	//	}
+	//	arr[r] = arr[l]
+	//}
+	//arr[l] = key
+	//quickSortKernel(arr, left, l-1)
+	//quickSortKernel(arr, l+1, right)
+
+	/* method 2 */
+	key := arr[right] // 把最右边的数记为关键位
+	i := left - 1
+	for j := left; j < right; j++ { // 从左向右走，让各数字与关键字对比
+		if arr[j] <= key {
+			i++
+			arr[i], arr[j] = arr[j], arr[i]
 		}
-		arr[l] = arr[r]
-		for l < r && key >= arr[l] { // 从左向右扫描，发现有大于key的数，就把它移到右边
-			l++
-		}
-		arr[r] = arr[l]
 	}
-	arr[l] = key
-	quickSortKernel(arr, left, l-1)
-	quickSortKernel(arr, l+1, right)
+	arr[i+1], arr[right] = arr[right], arr[i+1]
+	quickSortKernel(arr, left, i)
+	quickSortKernel(arr, i+2, right)
 }
 
 // 归并排序
