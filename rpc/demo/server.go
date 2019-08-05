@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./data"
+	"github.com/xiongwei9/Gogogo/rpc/demo/data"
 	"log"
 	"net/http"
 	"net/rpc"
