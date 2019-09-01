@@ -1,4 +1,4 @@
-package al_test
+package al
 
 import (
 	"reflect"
