@@ -7,10 +7,14 @@ package helloworld;
 
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloResponse) {}
+
+  rpc SayHelloServerStream (HelloRequest) returns (stream HelloResponse) {}
+  rpc SayHelloClientStream (stream HelloRequest) returns (HelloResponse) {}
+  rpc SayHelloAllStream (stream HelloRequest) returns (stream HelloResponse) {}
 }
 
 message HelloRequest {
-  string name = 1;
+  string message = 1;
 }
 
 message HelloResponse {

@@ -5,21 +5,22 @@ import (
 	"log"
 )
 
-var RedisClient *redis.Client
+var client *redis.Client
 
 func init() {
 	log.Println("init redis client")
-	RedisClient = newClient()
-}
-
-func newClient() *redis.Client {
-	client := redis.NewClient(&redis.Options{
+	client = redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",
 		DB:       0,
 	})
-	pong, err := client.Ping().Result()
-	log.Println(pong, err)
 
+	_, err := client.Ping().Result()
+	if err != nil {
+		log.Fatalf("redis ping error: %v", err)
+	}
+}
+
+func GetClient() *redis.Client {
 	return client
 }

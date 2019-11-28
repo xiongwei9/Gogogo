@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/xiongwei9/Gogogo/rpc/gRPC/constant"
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -8,13 +9,8 @@ import (
 	"os"
 )
 
-const (
-	address     = "localhost:50051"
-	defaultName = "world"
-)
-
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(constant.Address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -26,11 +22,11 @@ func main() {
 	}()
 
 	c := pb.NewGreeterClient(conn)
-	name := defaultName
+	message := "hello, gRPC"
 	if len(os.Args) > 1 {
-		name = os.Args[1]
+		message = os.Args[1]
 	}
-	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
+	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Message: message})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

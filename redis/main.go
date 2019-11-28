@@ -8,7 +8,7 @@ import (
 )
 
 func testRedis() {
-	redisClient := client.RedisClient
+	redisClient := client.GetClient()
 
 	const key = "name"
 	const anotherKey = "a_name_not_exist"
