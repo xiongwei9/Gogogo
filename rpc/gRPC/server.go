@@ -1,5 +1,7 @@
 package main
 
+// Goland: import的时候按目录导入，但是使用的时候需要以目录中的package的名字用，一个目录里面的所有go文件都必须使用同一个package名字
+// 这里用pb重命名的"github.com/xiongwei9/Gogogo/rpc/gRPC/proto"的helloworld package
 import (
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
 	"golang.org/x/net/context"
