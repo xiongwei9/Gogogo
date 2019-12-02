@@ -6,11 +6,24 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
-	"os"
 )
 
 func main() {
-	conn, err := grpc.Dial(constant.Address, grpc.WithInsecure())
+	/*************** SSL认证 start ***************/
+	//crtPath := "./ssl/server.crt"
+	//_, filename, _, _ := runtime.Caller(1)
+	//crtFile := path.Join(path.Dir(filename), crtPath)
+
+	//crtFile := "/Users/xiongwei.zhu/programmer/go_workplace/Gogogo/rpc/gRPC/ssl/server.crt"
+	//creds, err := credentials.NewClientTLSFromFile(crtFile, "Gogogo")
+	//if err != nil {
+	//	log.Fatalf("credentail error: %v", err)
+	//}
+	//
+	//conn, err := grpc.Dial(constant.Address, grpc.WithTransportCredentials(creds)) // SSL认证
+	/*************** SSL认证 end ***************/
+
+	conn, err := grpc.Dial(constant.Address, grpc.WithInsecure()) // 无SSL认证
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -23,9 +36,7 @@ func main() {
 
 	c := pb.NewGreeterClient(conn)
 	message := "hello, gRPC"
-	if len(os.Args) > 1 {
-		message = os.Args[1]
-	}
+
 	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Message: message})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
