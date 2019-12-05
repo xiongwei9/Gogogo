@@ -30,7 +30,8 @@ func StartRpcServerRegister() error {
 				ServiceName:  "HelloService",
 				Host:         constant.Host,
 				Port:         constant.PortInt,
-				IntervalTime: time.Duration(10)})
+				IntervalTime: time.Duration(10),
+			})
 			if err != nil {
 				log.Fatalf("register service error")
 			}

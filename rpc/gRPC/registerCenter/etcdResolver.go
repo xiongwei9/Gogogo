@@ -95,7 +95,7 @@ func (cr *etcdResolver) watcher() {
 		}
 		adds, serviceConfig, err := cr.etcdBuilder.resolve()
 		if err != nil {
-			log.Fatal("query service entries error:", err.Error())
+			log.Fatal("Etcd query service entries error:", err.Error())
 		}
 		(*cr.clientConn).NewAddress(adds)
 		(*cr.clientConn).NewServiceConfig(serviceConfig)
