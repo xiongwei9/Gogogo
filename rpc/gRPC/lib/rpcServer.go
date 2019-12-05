@@ -4,13 +4,50 @@ import (
 	"fmt"
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/constant"
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
+	"github.com/xiongwei9/Gogogo/rpc/gRPC/registerCenter"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 	"strings"
+	"time"
 )
+
+/**
+ * 使用注册中心的gRpc服务器
+ */
+func StartRpcServerRegister() error {
+	lis, err := net.Listen("tcp", ":"+constant.Port)
+	if err != nil {
+		return err
+	}
+
+	etcdRegister := registerCenter.NewRegisterImpl([]string{constant.EtcdAddress}, time.Second*3)
+	go func() {
+		for {
+			err := etcdRegister.Register(registerCenter.ServiceDescInfo{
+				ServiceName:  "HelloService",
+				Host:         constant.Host,
+				Port:         constant.PortInt,
+				IntervalTime: time.Duration(10)})
+			if err != nil {
+				log.Fatalf("register service error")
+			}
+			time.Sleep(time.Second * 5)
+		}
+	}()
+
+	gRpcServer := grpc.NewServer()
+	pb.RegisterGreeterServer(gRpcServer, &server{})
+
+	// 开启服务端
+	reflection.Register(gRpcServer)
+	if err := gRpcServer.Serve(lis); err != nil {
+		return err
+	}
+	return nil
+}
 
 func StartRpcServer() error {
 	lis, err := net.Listen("tcp", ":"+constant.Port)
