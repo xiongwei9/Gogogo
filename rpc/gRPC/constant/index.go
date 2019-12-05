@@ -1,6 +1,9 @@
 package constant
 
 const (
-	Port    = "50051"
-	Address = "localhost" + ":" + Port
+	Host        = "localhost"
+	Port        = "50051"
+	PortInt     = 50051
+	Address     = Host + ":" + Port
+	EtcdAddress = Host + ":2379"
 )
