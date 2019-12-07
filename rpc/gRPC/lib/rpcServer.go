@@ -1,11 +1,11 @@
 package lib
 
 import (
+	"context"
 	"fmt"
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/constant"
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/registerCenter"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
