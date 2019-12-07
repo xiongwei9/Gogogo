@@ -8,6 +8,6 @@ import (
 func main() {
 	err := lib.StartRpcServerRegister()
 	if err != nil {
-		log.Fatalf("StartRpcServerRegister error")
+		log.Fatalf("StartRpcServerRegister error: %v", err)
 	}
 }

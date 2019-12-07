@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/constant"
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
 )
