@@ -9,7 +9,7 @@ import (
 
 var wg sync.WaitGroup
 
-func TestClient(t *testing.T) {
+func TestConsumer(t *testing.T) {
 	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, nil)
 	if err != nil {
 		t.Fatalf("init consumer error: %s", err.Error())
@@ -34,8 +34,8 @@ func TestClient(t *testing.T) {
 
 		wg.Add(1)
 		go func(pc sarama.PartitionConsumer) {
-			defer pc.AsyncClose()
 			defer wg.Done()
+			defer pc.AsyncClose()
 			for msg := range pc.Messages() {
 				log.Printf("%s --- Partition:%d, Offset:%d, Key:%s, Value:%s\n", msg.Topic, msg.Partition, msg.Offset, string(msg.Key), string(msg.Value))
 			}
