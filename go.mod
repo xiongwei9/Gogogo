@@ -3,6 +3,7 @@ module github.com/xiongwei9/Gogogo
 go 1.12
 
 require (
+	github.com/Shopify/sarama v1.24.1
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/go-systemd v0.0.0-00010101000000-000000000000 // indirect
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
