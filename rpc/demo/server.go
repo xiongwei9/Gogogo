@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/xiongwei9/Gogogo/rpc/demo/data"
 	"log"
 	"net/http"
 	"net/rpc"
+
+	"github.com/xiongwei9/Gogogo/rpc/demo/data"
 )
 
 type EchoService struct {

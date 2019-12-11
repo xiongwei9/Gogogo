@@ -1,8 +1,9 @@
 package kafka
 
 import (
-	"github.com/Shopify/sarama"
 	"testing"
+
+	"github.com/Shopify/sarama"
 )
 
 func TestProducer(t *testing.T) {

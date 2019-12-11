@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/go-redis/redis/v7"
-	"github.com/xiongwei9/Gogogo/redis/client"
 	"log"
 	"time"
+
+	"github.com/go-redis/redis/v7"
+	"github.com/xiongwei9/Gogogo/redis/client"
 )
 
 func testRedis() {

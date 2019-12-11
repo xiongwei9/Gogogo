@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/constant"
 	pb "github.com/xiongwei9/Gogogo/rpc/gRPC/proto"
 	"github.com/xiongwei9/Gogogo/rpc/gRPC/registerCenter"
 	"google.golang.org/grpc"
-	"log"
 )
 
 func main() {

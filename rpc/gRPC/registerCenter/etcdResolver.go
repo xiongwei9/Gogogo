@@ -2,12 +2,13 @@ package registerCenter
 
 import (
 	"context"
-	"github.com/coreos/etcd/clientv3"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
 	"log"
 	"sync"
 	"time"
+
+	"github.com/coreos/etcd/clientv3"
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 )
 
 type etcdBuilder struct {

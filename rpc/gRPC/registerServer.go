@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/xiongwei9/Gogogo/rpc/gRPC/lib"
 	"log"
+
+	"github.com/xiongwei9/Gogogo/rpc/gRPC/lib"
 )
 
 func main() {

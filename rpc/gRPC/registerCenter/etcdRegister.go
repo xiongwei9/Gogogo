@@ -3,10 +3,11 @@ package registerCenter
 import (
 	"context"
 	"fmt"
-	"github.com/coreos/etcd/clientv3"
-	"github.com/coreos/etcd/etcdserver/api/v3rpc/rpctypes"
 	"log"
 	"time"
+
+	"github.com/coreos/etcd/clientv3"
+	"github.com/coreos/etcd/etcdserver/api/v3rpc/rpctypes"
 )
 
 type etcdRegisterImpl struct {

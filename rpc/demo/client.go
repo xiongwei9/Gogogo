@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/xiongwei9/Gogogo/rpc/demo/data"
 	"log"
 	"net/rpc"
+
+	"github.com/xiongwei9/Gogogo/rpc/demo/data"
 )
 
 func CallEcho(arg data.Message) (result *data.Message, err error) {

@@ -7,7 +7,9 @@ import (
 )
 
 func TestContext_timeout(t *testing.T) {
-	ctx, _ := context.WithTimeout(context.Background(), time.Second*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	defer cancel()
+
 	select {
 	case <-ctx.Done():
 		t.Logf("context done: %v", ctx.Err())

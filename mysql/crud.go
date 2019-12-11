@@ -2,8 +2,9 @@ package mysql
 
 import (
 	"database/sql"
-	"github.com/xiongwei9/Gogogo/mysql/model"
 	"log"
+
+	"github.com/xiongwei9/Gogogo/mysql/model"
 )
 
 func CreateTable(db *sql.DB) {

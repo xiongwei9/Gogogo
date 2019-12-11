@@ -1,10 +1,11 @@
 package kafka
 
 import (
-	"github.com/Shopify/sarama"
 	"log"
 	"sync"
 	"testing"
+
+	"github.com/Shopify/sarama"
 )
 
 var wg sync.WaitGroup

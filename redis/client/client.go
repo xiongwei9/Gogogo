@@ -1,8 +1,9 @@
 package client
 
 import (
-	"github.com/go-redis/redis/v7"
 	"log"
+
+	"github.com/go-redis/redis/v7"
 )
 
 var client *redis.Client
